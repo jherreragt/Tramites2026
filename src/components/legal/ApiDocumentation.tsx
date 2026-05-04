@@ -26,21 +26,21 @@ export default function ApiDocumentation() {
   const endpoints = [
     {
       method: 'GET',
-      path: '/api/procedures',
-      description: 'Obtiene el listado completo de trámites disponibles.',
-      example: `${baseUrl}/api/procedures`
+      path: '/rest/v1/procedures',
+      description: 'Consulta el catálogo de trámites. Soporta filtros avanzados de PostgREST.',
+      example: `${baseUrl}/rest/v1/procedures?select=*&name=ilike.*DPI*`
     },
     {
       method: 'GET',
-      path: '/api/procedures?id={uuid}',
-      description: 'Obtiene la información detallada de un trámite específico mediante su ID.',
-      example: `${baseUrl}/api/procedures?id=123`
+      path: '/rest/v1/experiences',
+      description: 'Obtiene las rutas guiadas con sus trámites asociados.',
+      example: `${baseUrl}/rest/v1/experiences?select=*,procedures(*)`
     },
     {
       method: 'GET',
-      path: '/api/institutions',
-      description: 'Obtiene el listado de todas las instituciones gubernamentales registradas.',
-      example: `${baseUrl}/api/institutions`
+      path: '/rest/v1/institutions',
+      description: 'Directorio de instituciones responsables.',
+      example: `${baseUrl}/rest/v1/institutions?select=name,full_name,website`
     }
   ];
 
@@ -88,14 +88,14 @@ export default function ApiDocumentation() {
                     <div className="w-3 h-3 rounded-full bg-green-500"></div>
                   </div>
                   <button 
-                    onClick={() => copyToClipboard(`fetch('${baseUrl}/api/procedures')\n  .then(res => res.json())\n  .then(data => console.log(data));`, 'js-example')}
+                    onClick={() => copyToClipboard(`fetch('${baseUrl}/rest/v1/procedures?select=*')\n  .then(res => res.json())\n  .then(data => console.log(data));`, 'js-example')}
                     className="text-gray-400 hover:text-white transition-colors"
                   >
                     {copied === 'js-example' ? <CheckCircle className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
                   </button>
                 </div>
                 <pre className="text-blue-300 font-mono text-sm overflow-x-auto">
-                  <code>{`fetch('${baseUrl}/api/procedures')
+                  <code>{`fetch('${baseUrl}/rest/v1/procedures?select=*')
   .then(res => res.json())
   .then(data => console.log(data));`}</code>
                 </pre>

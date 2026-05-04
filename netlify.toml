@@ -7,14 +7,11 @@
   node_bundler = "esbuild"
 
 [[redirects]]
-  from = "/api/procedures"
-  to = "/.netlify/functions/procedures"
+  from = "/rest/v1/*"
+  to = "https://sthucsfyzcpgaqmcwczy.supabase.co/rest/v1/:splat"
   status = 200
-
-[[redirects]]
-  from = "/api/institutions"
-  to = "/.netlify/functions/institutions"
-  status = 200
+  force = true
+  headers = {apikey = "sb_publishable_dP3E1mg0j-wlSwiUre7lyw_PhRiHzED", Authorization = "Bearer sb_publishable_dP3E1mg0j-wlSwiUre7lyw_PhRiHzED"}
 
 [[redirects]]
   from = "/*"
