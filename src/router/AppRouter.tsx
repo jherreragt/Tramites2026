@@ -18,6 +18,7 @@ import PrivacyPage from '../pages/PrivacyPage';
 import AccessibilityPage from '../pages/AccessibilityPage';
 import AboutPage from '../pages/AboutPage';
 import DatabasePage from '../pages/DatabasePage';
+import ApiPage from '../pages/ApiPage';
 import NotFoundPage from '../pages/NotFoundPage';
 
 // Admin Pages
@@ -78,6 +79,7 @@ const AppRouter: React.FC = () => {
               <Route path="/accesibilidad" element={<AccessibilityPage />} />
               <Route path="/acerca-de" element={<AboutPage />} />
               <Route path="/base-de-datos" element={<DatabasePage />} />
+              <Route path="/api" element={<ApiPage />} />
               
               {/* Standalone pages inside Layout */}
               <Route path="/login" element={<LoginPage />} />

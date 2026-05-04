@@ -91,6 +91,7 @@ export default function Footer() {
                 <li><Link to="/observatorio" className="hover:text-white transition-colors">{t('nav.observatory')}</Link></li>
                 <li><Link to="/acerca-de" className="hover:text-white transition-colors">{t('nav.about')}</Link></li>
                 <li><Link to="/base-de-datos" className="hover:text-white transition-colors">Base de Datos</Link></li>
+                <li><Link to="/api" className="hover:text-white transition-colors">API para Desarrolladores</Link></li>
               </ul>
             </div>
 
