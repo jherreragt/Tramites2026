@@ -21,7 +21,7 @@ export default function ApiDocumentation() {
     setTimeout(() => setCopied(null), 2000);
   };
 
-  const baseUrl = window.location.origin;
+  const baseUrl = 'https://api.redciudadana.org';
 
   const endpoints = [
     {
