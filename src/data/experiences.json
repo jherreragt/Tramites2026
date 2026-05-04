@@ -1,0 +1,180 @@
+[
+  {
+    "id": "exp-001",
+    "nombre": "Quiero Abrir una Panadería",
+    "descripcion": "Todos los trámites necesarios para abrir y operar legalmente una panadería en Guatemala",
+    "icon": "Store",
+    "color": "from-blue-500 to-blue-700",
+    "categoria": "Emprendimiento",
+    "duracion_estimada": "35-45 días",
+    "ids_procedures": [
+      "1",
+      "2",
+      "3",
+      "5"
+    ],
+    "pasos_adicionales": [
+      "Buscar y evaluar local comercial adecuado",
+      "Elaborar plan de negocios y presupuesto",
+      "Adquirir equipo de panadería",
+      "Contratar personal capacitado",
+      "Realizar pruebas de productos antes de apertura"
+    ]
+  },
+  {
+    "id": "exp-002",
+    "nombre": "Quiero Formalizar mi Negocio",
+    "descripcion": "Pasos para constituir legalmente tu empresa y empezar a operar de forma formal",
+    "icon": "Briefcase",
+    "color": "from-blue-500 to-blue-700",
+    "categoria": "Negocios",
+    "duracion_estimada": "10-15 días",
+    "ids_procedures": [
+      "7",
+      "8",
+      "9"
+    ],
+    "pasos_adicionales": [
+      "Definir el tipo de empresa (individual o sociedad)",
+      "Preparar documentación legal requerida",
+      "Abrir cuenta bancaria empresarial",
+      "Establecer sistema contable",
+      "Consultar con contador para obligaciones fiscales"
+    ]
+  },
+  {
+    "id": "exp-003",
+    "nombre": "Quiero Exportar mis Productos",
+    "descripcion": "Proceso completo para obtener permisos y certificaciones necesarias para exportar",
+    "icon": "Plane",
+    "color": "from-blue-500 to-blue-700",
+    "categoria": "Comercio Exterior",
+    "duracion_estimada": "5-10 días",
+    "ids_procedures": [
+      "14",
+      "15",
+      "16"
+    ],
+    "pasos_adicionales": [
+      "Investigar mercados objetivo y requisitos del país destino",
+      "Identificar productos a exportar y su clasificación arancelaria",
+      "Contratar agente aduanal certificado",
+      "Establecer logística de transporte internacional",
+      "Preparar empaque y etiquetado según normas internacionales",
+      "Obtener certificaciones adicionales si el producto lo requiere"
+    ]
+  },
+  {
+    "id": "exp-004",
+    "nombre": "Quiero Contratar Empleados",
+    "descripcion": "Trámites laborales necesarios para contratar personal de manera formal y legal",
+    "icon": "Users",
+    "color": "from-blue-500 to-blue-700",
+    "categoria": "Recursos Humanos",
+    "duracion_estimada": "7-10 días",
+    "ids_procedures": [
+      "10",
+      "18",
+      "19"
+    ],
+    "pasos_adicionales": [
+      "Definir perfiles de puesto y salarios",
+      "Elaborar contratos de trabajo conforme a la ley",
+      "Establecer políticas internas de la empresa",
+      "Implementar sistema de registro de asistencia",
+      "Capacitar sobre derechos y obligaciones laborales",
+      "Establecer proceso de pago de planilla"
+    ]
+  },
+  {
+    "id": "exp-005",
+    "nombre": "Quiero Construir mi Casa",
+    "descripcion": "Permisos y licencias necesarias para construir tu vivienda de forma legal",
+    "icon": "Home",
+    "color": "from-blue-500 to-blue-700",
+    "categoria": "Construcción",
+    "duracion_estimada": "35-40 días",
+    "ids_procedures": [
+      "11",
+      "12",
+      "13"
+    ],
+    "pasos_adicionales": [
+      "Contratar arquitecto o ingeniero colegiado activo",
+      "Elaborar diseño arquitectónico y estructural",
+      "Verificar uso de suelo permitido en la zona",
+      "Obtener presupuesto de construcción",
+      "Contratar constructor o maestro de obra con experiencia",
+      "Asegurar supervisión técnica durante la obra"
+    ]
+  },
+  {
+    "id": "exp-006",
+    "nombre": "Quiero Estudiar en la USAC",
+    "descripcion": "Proceso completo de admisión para ingresar a la Universidad de San Carlos",
+    "icon": "GraduationCap",
+    "color": "from-blue-500 to-blue-700",
+    "categoria": "Educación",
+    "duracion_estimada": "Variable según calendario",
+    "ids_procedures": [
+      "20",
+      "21",
+      "22"
+    ],
+    "pasos_adicionales": [
+      "Revisar oferta académica y requisitos específicos de la carrera",
+      "Verificar fechas importantes en el calendario de admisión",
+      "Prepararse para las pruebas de conocimiento",
+      "Reunir documentación académica con anticipación",
+      "Participar en charlas de inducción de la facultad",
+      "Planificar horarios y costos de estudio"
+    ]
+  },
+  {
+    "id": "exp-007",
+    "nombre": "Quiero Proteger mi Marca",
+    "descripcion": "Registro de marca para proteger el nombre o logo de tu negocio",
+    "icon": "Award",
+    "color": "from-blue-500 to-blue-700",
+    "categoria": "Propiedad Intelectual",
+    "duracion_estimada": "30 días",
+    "ids_procedures": [
+      "6"
+    ],
+    "pasos_adicionales": [
+      "Realizar búsqueda de antecedentes de marca similar",
+      "Diseñar logo profesional y distintivo",
+      "Definir clases de productos/servicios a proteger",
+      "Preparar documentación y comprobantes de pago",
+      "Monitorear publicación en el diario oficial",
+      "Estar atento a posibles oposiciones de terceros",
+      "Renovar registro cada 10 años"
+    ]
+  },
+  {
+    "id": "exp-008",
+    "nombre": "Iniciar Negocio con Empleados",
+    "descripcion": "Ruta completa para establecer un negocio formal con personal contratado",
+    "icon": "Building2",
+    "color": "from-blue-500 to-blue-700",
+    "categoria": "Emprendimiento Formal",
+    "duracion_estimada": "20-30 días",
+    "ids_procedures": [
+      "1",
+      "2",
+      "7",
+      "8",
+      "9",
+      "10",
+      "18"
+    ],
+    "pasos_adicionales": [
+      "Elaborar plan de negocios completo",
+      "Definir estructura organizacional",
+      "Establecer políticas de recursos humanos",
+      "Implementar sistema de contabilidad y nómina",
+      "Capacitar al personal sobre normativas laborales",
+      "Establecer manual de procedimientos internos"
+    ]
+  }
+]
