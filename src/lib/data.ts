@@ -168,6 +168,7 @@ export const institutionsService = {
     const { data, error } = await supabase
       .from('institutions')
       .select('*')
+      .is('deleted_at', null)
       .order('name');
 
     if (error) return [];
@@ -179,6 +180,7 @@ export const institutionsService = {
       .from('institutions')
       .select('*')
       .eq('id', id)
+      .is('deleted_at', null)
       .single();
 
     if (error || !data) return null;
@@ -188,18 +190,33 @@ export const institutionsService = {
 
 export const observatoryService = {
   async getAll(): Promise<ObservatoryData[]> {
-    const { data, error } = await supabase
-      .from('observatory')
-      .select('*')
-      .order('evaluation_score', { ascending: false });
+    // Fetch observatory data and active procedure names in parallel
+    const [obsResult, procResult] = await Promise.all([
+      supabase
+        .from('observatory')
+        .select('*')
+        .order('evaluation_score', { ascending: false }),
+      supabase
+        .from('procedures')
+        .select('name')
+        .is('deleted_at', null)
+    ]);
 
-    if (error) {
-      console.error('Error fetching observatory data:', error);
+    if (obsResult.error) {
+      console.error('Error fetching observatory data:', obsResult.error);
       return [];
     }
 
-    // Mapeamos 'tramite' a 'name' para que los componentes de React no fallen
-    return (data || []).map(item => ({
+    const activeProcedureNames = new Set(
+      (procResult.data || []).map((p: any) => p.name.toLowerCase().trim())
+    );
+
+    // Only return observatory items that still have an active matching procedure
+    const filtered = (obsResult.data || []).filter((item: any) =>
+      activeProcedureNames.has(item.tramite.toLowerCase().trim())
+    );
+
+    return filtered.map((item: any) => ({
       ...item,
       name: item.tramite
     }));
