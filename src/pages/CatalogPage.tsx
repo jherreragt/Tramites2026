@@ -9,7 +9,7 @@ import Breadcrumb from '../components/common/Breadcrumb';
 const CatalogPage: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { category: urlCategory } = useParams();
+  const urlCategory = searchParams.get('category');
   
   const initialSearch = searchParams.get('search') || '';
   const [searchTerm, setSearchTerm] = useState(initialSearch);
