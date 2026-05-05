@@ -190,33 +190,17 @@ export const institutionsService = {
 
 export const observatoryService = {
   async getAll(): Promise<ObservatoryData[]> {
-    // Fetch observatory data and active procedure names in parallel
-    const [obsResult, procResult] = await Promise.all([
-      supabase
-        .from('observatory')
-        .select('*')
-        .order('evaluation_score', { ascending: false }),
-      supabase
-        .from('procedures')
-        .select('name')
-        .is('deleted_at', null)
-    ]);
+    const { data, error } = await supabase
+      .from('observatory')
+      .select('*')
+      .order('evaluation_score', { ascending: false });
 
-    if (obsResult.error) {
-      console.error('Error fetching observatory data:', obsResult.error);
+    if (error) {
+      console.error('Error fetching observatory data:', error);
       return [];
     }
 
-    const activeProcedureNames = new Set(
-      (procResult.data || []).map((p: any) => p.name.toLowerCase().trim())
-    );
-
-    // Only return observatory items that still have an active matching procedure
-    const filtered = (obsResult.data || []).filter((item: any) =>
-      activeProcedureNames.has(item.tramite.toLowerCase().trim())
-    );
-
-    return filtered.map((item: any) => ({
+    return (data || []).map(item => ({
       ...item,
       name: item.tramite
     }));
