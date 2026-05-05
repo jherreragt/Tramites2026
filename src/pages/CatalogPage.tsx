@@ -9,22 +9,23 @@ import Breadcrumb from '../components/common/Breadcrumb';
 const CatalogPage: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const urlCategory = searchParams.get('category');
-  
-  const initialSearch = searchParams.get('search') || '';
-  const [searchTerm, setSearchTerm] = useState(initialSearch);
-  const [categoryFilter, setCategoryFilter] = useState(urlCategory || 'Todas');
-  const [showFilters, setShowFilters] = useState(false);
-  const [debouncedSearch, setDebouncedSearch] = useState(initialSearch);
+  const urlCategory = searchParams.get('category') || 'Todas';
+  const urlSearch = searchParams.get('search') || '';
 
-  // Synchronize categoryFilter with URL params when they change
+  const [searchTerm, setSearchTerm] = useState(urlSearch);
+  const [categoryFilter, setCategoryFilter] = useState(urlCategory);
+  const [showFilters, setShowFilters] = useState(false);
+  const [debouncedSearch, setDebouncedSearch] = useState(urlSearch);
+
+  // Sync state whenever URL changes (e.g. user clicks a tag from home)
   useEffect(() => {
-    if (urlCategory) {
-      setCategoryFilter(urlCategory);
-    } else {
-      setCategoryFilter('Todas');
-    }
+    setCategoryFilter(urlCategory);
   }, [urlCategory]);
+
+  useEffect(() => {
+    setSearchTerm(urlSearch);
+    setDebouncedSearch(urlSearch);
+  }, [urlSearch]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -42,13 +43,13 @@ const CatalogPage: React.FC = () => {
 
   const filteredProcedures = useMemo(() => {
     return procedures.filter(p => {
-      const matchesSearch = 
+      const matchesSearch =
         p.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
         p.description.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
         (p.institutions?.name || '').toLowerCase().includes(debouncedSearch.toLowerCase());
-      
+
       const matchesCategory = categoryFilter === 'Todas' || p.category === categoryFilter;
-      
+
       return matchesSearch && matchesCategory;
     });
   }, [procedures, debouncedSearch, categoryFilter]);
