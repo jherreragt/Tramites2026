@@ -396,6 +396,11 @@ const AdminProcedureForm: React.FC = () => {
               <datalist id="catList">{existingCategories.map((c, i) => <option key={i} value={c} />)}</datalist>
             </div>
             <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Subcategoría</label>
+              <input type="text" list="subcatList" className="w-full px-4 py-2 border border-gray-300 rounded-lg" value={formData.subcategory} onChange={e => setFormData({ ...formData, subcategory: e.target.value })} placeholder="Opcional" />
+              <datalist id="subcatList">{existingSubcategories.map((c, i) => <option key={i} value={c} />)}</datalist>
+            </div>
+            <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Unidad o dirección</label>
               <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded-lg" value={formData.unidad_direccion} onChange={e => setFormData({ ...formData, unidad_direccion: e.target.value })} placeholder="Ej: Dirección de Catastro" />
             </div>
