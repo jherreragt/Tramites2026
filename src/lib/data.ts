@@ -126,7 +126,8 @@ export const proceduresService = {
   async getAll(): Promise<Procedure[]> {
     const { data, error } = await supabase
       .from('procedures')
-      .select('*, institutions(*)');
+      .select('*, institutions(*)')
+      .is('deleted_at', null);
 
     if (error) {
       console.error('Error fetching procedures:', error);
@@ -140,6 +141,7 @@ export const proceduresService = {
       .from('procedures')
       .select('*, institutions(*)')
       .eq('id', id)
+      .is('deleted_at', null)
       .single();
 
     if (error || !data) return null;
@@ -150,7 +152,8 @@ export const proceduresService = {
     const { data, error } = await supabase
       .from('procedures')
       .select('*, institutions(*)')
-      .eq('institution_id', institutionId);
+      .eq('institution_id', institutionId)
+      .is('deleted_at', null);
 
     if (error) {
       console.error('Error fetching procedures by institution:', error);
