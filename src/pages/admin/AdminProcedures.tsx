@@ -29,17 +29,25 @@ const AdminProcedures: React.FC = () => {
   }, []);
 
   const handleDelete = async (id: string, name: string) => {
-    if (window.confirm(`¿Estás seguro que deseas eliminar el trámite "${name}"?`)) {
+    if (window.confirm(`¿Estás seguro que deseas eliminar el trámite "${name}"? Esto también eliminará sus datos del Observatorio si los tiene.`)) {
+      // 1. Soft-delete the procedure
       const { error } = await supabase
         .from('procedures')
         .update({ deleted_at: new Date().toISOString() })
         .eq('id', id);
 
-      if (!error) {
-        setProcedures(procedures.filter(p => p.id !== id));
-      } else {
+      if (error) {
         alert('Error al eliminar el trámite');
+        return;
       }
+
+      // 2. Delete matching observatory record (hard delete since observatory has no deleted_at)
+      await supabase
+        .from('observatory')
+        .delete()
+        .eq('tramite', name);
+
+      setProcedures(procedures.filter(p => p.id !== id));
     }
   };
 
