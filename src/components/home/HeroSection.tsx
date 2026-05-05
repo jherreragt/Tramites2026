@@ -28,7 +28,7 @@ export default function HeroSection() {
   ];
 
   const handlePopularSearch = (search: string) => {
-    navigate(`/catalogo?search=${encodeURIComponent(search)}`);
+    navigate(`/experiencias?search=${encodeURIComponent(search)}`);
   };
 
   // Calculate real statistics
@@ -93,7 +93,7 @@ export default function HeroSection() {
               {['Negocios', 'Salud', 'Educación', 'Fiscal', 'Municipal'].map((cat) => (
                 <button
                   key={cat}
-                  onClick={() => navigate(`/catalogo?category=${cat}`)}
+                  onClick={() => navigate(`/experiencias?search=${cat}`)}
                   className="bg-white/10 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm hover:bg-white/20 transition-all border border-white/20 font-medium"
                 >
                   #{cat}

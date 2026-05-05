@@ -95,9 +95,17 @@ const categoryMapping: Record<string, CategoryFilter> = {
 export default function ExperiencesPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedId = searchParams.get('id');
-  const [searchQuery, setSearchQuery] = useState('');
+  const initialSearch = searchParams.get('search') || '';
+  const [searchQuery, setSearchQuery] = useState(initialSearch);
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>('all');
   const [isFiltering, setIsFiltering] = useState(false);
+
+  React.useEffect(() => {
+    const s = searchParams.get('search');
+    if (s !== null) {
+      setSearchQuery(s);
+    }
+  }, [searchParams]);
 
   const { procedures, loading: proceduresLoading } = useProcedures();
   const { experiences, loading: experiencesLoading } = useExperiences();
