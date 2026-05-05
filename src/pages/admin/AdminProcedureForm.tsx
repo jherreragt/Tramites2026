@@ -306,7 +306,7 @@ const AdminProcedureForm: React.FC = () => {
       navigate('/admin/procedures');
     } catch (err: any) {
       console.error("Error completo:", err);
-      setError(`Error: ${err.message}. Verifica que la tabla 'observatory' tenga el campo 'id' como numérico.`);
+      setError(`Error: ${err.message}`);
     } finally {
       setSaving(false);
     }

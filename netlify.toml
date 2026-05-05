@@ -6,12 +6,9 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-[[redirects]]
-  from = "/rest/v1/*"
-  to = "https://sthucsfyzcpgaqmcwczy.supabase.co/rest/v1/:splat"
-  status = 200
-  force = true
-  headers = {apikey = "sb_publishable_dP3E1mg0j-wlSwiUre7lyw_PhRiHzED", Authorization = "Bearer sb_publishable_dP3E1mg0j-wlSwiUre7lyw_PhRiHzED"}
+[[edge_functions]]
+  path = "/rest/v1/*"
+  function = "supabase"
 
 [[redirects]]
   from = "/*"

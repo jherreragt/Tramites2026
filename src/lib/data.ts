@@ -144,6 +144,19 @@ export const proceduresService = {
 
     if (error || !data) return null;
     return mapProcedure(data, data.institutions);
+  },
+
+  async getByInstitutionId(institutionId: string | number): Promise<Procedure[]> {
+    const { data, error } = await supabase
+      .from('procedures')
+      .select('*, institutions(*)')
+      .eq('institution_id', institutionId);
+
+    if (error) {
+      console.error('Error fetching procedures by institution:', error);
+      return [];
+    }
+    return (data || []).map(p => mapProcedure(p, p.institutions));
   }
 };
 
@@ -156,6 +169,17 @@ export const institutionsService = {
 
     if (error) return [];
     return (data || []).map(i => ({ ...i, id: String(i.id) }));
+  },
+
+  async getById(id: string | number): Promise<Institution | null> {
+    const { data, error } = await supabase
+      .from('institutions')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error || !data) return null;
+    return { ...data, id: String(data.id) };
   }
 };
 

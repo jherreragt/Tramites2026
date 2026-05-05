@@ -5,8 +5,7 @@ import {
   ExternalLink, FileText, CheckCircle, Info
 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-import institutionsData from '../data/institutions';
-import proceduresData from '../data/procedures';
+import { institutionsService, proceduresService } from '../lib/data';
 import Breadcrumb from '../components/common/Breadcrumb';
 
 interface Institution {
@@ -45,33 +44,30 @@ export default function InstitutionDetailPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchInstitutionData = () => {
+    const fetchInstitutionData = async () => {
       try {
         setLoading(true);
-        const numId = Number(id);
 
-        const instData = institutionsData.find(i => i.id === numId);
-        if (!instData) {
+        if (!id) {
           setError('Institution not found');
-          setLoading(false);
           return;
         }
 
-        setInstitution({
-          ...instData,
-          id: instData.id,
-        });
+        const [instData, procData] = await Promise.all([
+          institutionsService.getById(id),
+          proceduresService.getByInstitutionId(id)
+        ]);
 
-        const procData = proceduresData.filter(p => p.institution_id === numId);
-        setProcedures(procData.map(p => ({
-          id: p.id,
-          name: p.name,
-          description: p.description,
-          category: p.category,
-          duration: p.duration,
-          is_digital: p.is_digital,
-          type: p.type,
-        })));
+        if (!instData) {
+          setError('Institution not found');
+          return;
+        }
+
+        // @ts-ignore - Temporary cast to handle local types vs Supabase types
+        setInstitution(instData);
+        
+        // @ts-ignore - Temporary cast
+        setProcedures(procData);
 
       } catch (err) {
         console.error('Error fetching institution:', err);
