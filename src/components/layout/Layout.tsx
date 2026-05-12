@@ -10,6 +10,7 @@ import SearchModal from '../common/SearchModal';
 import ReportProblemsButton from '../common/ReportProblemsButton';
 import PromoPopup from '../common/PromoPopup';
 import WhatsAppButton from '../common/WhatsAppButton';
+import TelegramButton from '../common/TelegramButton';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -33,6 +34,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       {/* <Chatbot /> */}
       <ReportProblemsButton />
       <WhatsAppButton />
+      <TelegramButton />
       <PromoPopup />
 
       <SearchModal
