@@ -160,6 +160,41 @@ export const proceduresService = {
       return [];
     }
     return (data || []).map(p => mapProcedure(p, p.institutions));
+  },
+
+  async search(query: string): Promise<Procedure[]> {
+    if (!query.trim()) return [];
+    
+    // Transformamos la query para que sea compatible con websearch_to_tsquery o phraseto_tsquery
+    // Al usar .textSearch por defecto Supabase usa websearch_to_tsquery que es muy amigable con el usuario.
+    const { data, error } = await supabase
+      .from('procedures')
+      .select('*, institutions(*)')
+      .textSearch('search_vector', query, {
+        type: 'websearch',
+        config: 'spanish'
+      })
+      .is('deleted_at', null);
+
+    if (error) {
+      console.error('Error en búsqueda de trámites:', error);
+      return [];
+    }
+    return (data || []).map(p => mapProcedure(p, p.institutions));
+  },
+
+  async getByCategory(category: string): Promise<Procedure[]> {
+    const { data, error } = await supabase
+      .from('procedures')
+      .select('*, institutions(*)')
+      .eq('category', category)
+      .is('deleted_at', null);
+
+    if (error) {
+      console.error('Error fetching procedures by category:', error);
+      return [];
+    }
+    return (data || []).map(p => mapProcedure(p, p.institutions));
   }
 };
 
