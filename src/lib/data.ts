@@ -195,6 +195,29 @@ export const proceduresService = {
       return [];
     }
     return (data || []).map(p => mapProcedure(p, p.institutions));
+  },
+
+  // Nuevo método para obtener solo los pasos de un trámite
+  async getStepsById(id: string): Promise<any[]> {
+    const { data, error } = await supabase
+      .from('procedures')
+      .select('steps')
+      .eq('id', id)
+      .is('deleted_at', null)
+      .single();
+    if (error) {
+      console.error('Error fetching steps:', error);
+      return [];
+    }
+    const rawSteps = data?.steps;
+    if (!rawSteps) return [];
+    if (Array.isArray(rawSteps)) return rawSteps;
+    try {
+      const parsed = JSON.parse(rawSteps);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return typeof rawSteps === 'string' ? rawSteps.split(', ') : [];
+    }
   }
 };
 

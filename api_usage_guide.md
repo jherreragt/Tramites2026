@@ -15,14 +15,18 @@ Esta guía contiene la información necesaria para consumir la API de Trámites 
 | Acción | Endpoint |
 | :--- | :--- |
 | Listar todos | `GET /procedures?select=*` |
-| Búsqueda por nombre | `GET /procedures?name=ilike.*DPI*&select=*` |
+| Búsqueda por nombre (ilike) | `GET /procedures?name=ilike.*DPI*&select=*` |
+| Búsqueda full‑text (español) | `GET /procedures?search_vector=websearch('consulta')&select=*` |
 | Trámites de una institución | `GET /procedures?institution_id=eq.[UUID]&select=*` |
 
 ### 2. Experiencias (`/experiences`)
 | Acción | Endpoint |
 | :--- | :--- |
 | Listar todas | `GET /experiences?select=*` |
-| Experiencia con trámites | `GET /experiences?select=*,procedures(*)` |
+| Búsqueda por categoría | `GET /experiences?categoria=eq.MiCategoria&select=*` |
+
+> [!NOTE]
+> La tabla `experiences` no tiene una relación de clave foránea tradicional (Foreign Key) hacia `procedures`. En su lugar, utiliza una columna llamada `ids_procedures` que contiene un arreglo de IDs. Para obtener los trámites de una experiencia, primero debes consultar la experiencia y luego hacer una segunda petición a `/procedures?id=in.(id1,id2,id3)` usando los IDs devueltos.
 
 ### 3. Instituciones (`/institutions`)
 | Acción | Endpoint |
