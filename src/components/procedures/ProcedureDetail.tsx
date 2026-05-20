@@ -244,16 +244,16 @@ export default function ProcedureDetail({ procedure }: ProcedureDetailProps) {
                     <p className="text-xl font-bold text-blue-900 mb-6">{institutionName}</p>
                     <ul className="space-y-4">
                       <li className="flex items-center gap-3 text-blue-700 font-bold hover:text-blue-900 cursor-pointer group transition-colors">
-                        <PhoneIcon className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                        <span className="text-sm">Consulta el directorio telefónico oficial</span>
+                        <PhoneIcon className="w-4 h-4 group-hover:scale-110 transition-transform flex-shrink-0" />
+                        <span className="text-sm">{procedure.institutions?.phone || 'Consulta el directorio telefónico oficial'}</span>
                       </li>
                       <li className="flex items-center gap-3 text-blue-700 font-bold hover:text-blue-900 cursor-pointer group transition-colors">
-                        <MailIcon className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                        <span className="text-sm">Información disponible en el sitio web oficial</span>
+                        <MailIcon className="w-4 h-4 group-hover:scale-110 transition-transform flex-shrink-0" />
+                        <span className="text-sm">{procedure.institutions?.email || 'Información disponible en el sitio web oficial'}</span>
                       </li>
                       <li className="flex items-center gap-3 text-blue-700 font-bold hover:text-blue-900 cursor-pointer group transition-colors">
-                        <MapPinIcon className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                        <span className="text-sm">Ubicaciones en el sitio web de la institución</span>
+                        <MapPinIcon className="w-4 h-4 group-hover:scale-110 transition-transform flex-shrink-0" />
+                        <span className="text-sm line-clamp-2">{procedure.institutions?.address || 'Ubicaciones en el sitio web de la institución'}</span>
                       </li>
                     </ul>
                   </div>
