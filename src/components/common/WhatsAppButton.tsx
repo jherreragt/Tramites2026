@@ -18,7 +18,14 @@ export default function WhatsAppButton() {
   }, [dismissed]);
 
   useEffect(() => {
+    const handleOtherOpen = () => setShowTooltip(false);
+    window.addEventListener('telegram-tooltip-opened', handleOtherOpen);
+    return () => window.removeEventListener('telegram-tooltip-opened', handleOtherOpen);
+  }, []);
+
+  useEffect(() => {
     if (showTooltip) {
+      window.dispatchEvent(new Event('whatsapp-tooltip-opened'));
       setPulse(false);
     }
   }, [showTooltip]);
@@ -36,7 +43,7 @@ export default function WhatsAppButton() {
   const isEs = language === 'es';
 
   return (
-    <div className="fixed bottom-28 right-6 z-50">
+    <div className={`fixed bottom-6 right-6 transition-all duration-300 ${showTooltip ? 'z-[60]' : 'z-50'}`}>
       {showTooltip && (
         <div className="absolute bottom-full right-0 mb-3 w-80 animate-fade-in-up">
           <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden">

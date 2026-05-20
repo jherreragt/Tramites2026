@@ -10,11 +10,16 @@ export default function TelegramButton() {
   const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!dismissed) setShowTooltip(true);
-    }, 6000); // Aparece un segundo después que la de WA
-    return () => clearTimeout(timer);
-  }, [dismissed]);
+    const handleOtherOpen = () => setShowTooltip(false);
+    window.addEventListener('whatsapp-tooltip-opened', handleOtherOpen);
+    return () => window.removeEventListener('whatsapp-tooltip-opened', handleOtherOpen);
+  }, []);
+
+  useEffect(() => {
+    if (showTooltip) {
+      window.dispatchEvent(new Event('telegram-tooltip-opened'));
+    }
+  }, [showTooltip]);
 
   const handleDismiss = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -29,7 +34,7 @@ export default function TelegramButton() {
   const isEs = language === 'es';
 
   return (
-    <div className="fixed bottom-44 right-6 z-50">
+    <div className={`fixed bottom-24 right-6 transition-all duration-300 ${showTooltip ? 'z-[60]' : 'z-50'}`}>
       {showTooltip && (
         <div className="absolute bottom-full right-0 mb-3 w-80 animate-fade-in-up">
           <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden">
