@@ -17,17 +17,20 @@ const AdminDashboard: React.FC = () => {
         // Count procedures
         const { count: procCount } = await supabase
           .from('procedures')
-          .select('*', { count: 'exact', head: true });
+          .select('*', { count: 'exact', head: true })
+          .is('deleted_at', null);
 
         // Count institutions
         const { count: instCount } = await supabase
           .from('institutions')
-          .select('*', { count: 'exact', head: true });
+          .select('*', { count: 'exact', head: true })
+          .is('deleted_at', null);
 
         // Get recent procedures
         const { data: recent } = await supabase
           .from('procedures')
           .select('id, name, updated_at')
+          .is('deleted_at', null)
           .order('updated_at', { ascending: false })
           .limit(5);
 
