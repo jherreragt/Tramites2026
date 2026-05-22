@@ -87,6 +87,24 @@ Para migrar esta información a un nuevo entorno de Supabase (Producción):
 
 ---
 
+## 🗄️ Migraciones de Base de Datos
+
+El proyecto incluye migraciones SQL en la carpeta `supabase/migrations/`. A continuación se documentan las migraciones más relevantes:
+
+### `20260521000000_add_deleted_at_to_observatory.sql`
+
+**Descripción:** Agrega la columna `deleted_at` (tipo `timestamptz`, default `NULL`) a la tabla `observatory` para soportar eliminación lógica (soft-delete) de registros, consistente con el patrón ya utilizado en la tabla `procedures`.
+
+**Cambios realizados:**
+- Se agrega la columna `deleted_at` a la tabla `observatory`.
+- Se crea un índice `idx_observatory_deleted_at` para optimizar las consultas filtradas.
+
+**Cómo ejecutar manualmente** (si no se usa Supabase CLI):
+1. Ve al **SQL Editor** de tu proyecto en Supabase.
+2. Copia y ejecuta el contenido del archivo `supabase/migrations/20260521000000_add_deleted_at_to_observatory.sql`.
+
+---
+
 ## 🗄️ Estructura del Proyecto
 
 - `/src`: Código fuente de la aplicación React.
