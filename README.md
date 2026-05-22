@@ -103,6 +103,29 @@ El proyecto incluye migraciones SQL en la carpeta `supabase/migrations/`. A cont
 1. Ve al **SQL Editor** de tu proyecto en Supabase.
 2. Copia y ejecuta el contenido del archivo `supabase/migrations/20260521000000_add_deleted_at_to_observatory.sql`.
 
+### `20260522000000_improve_search_procedures.sql`
+
+**Descripción:** Reemplaza la función `search_procedures` con una versión mejorada que incluye búsqueda difusa (fuzzy matching), tolerancia a acentos y ranking multi-criterio.
+
+**Extensiones requeridas:**
+- `pg_trgm` — Búsqueda por similitud (tolerancia a typos)
+- `unaccent` — Ignorar acentos en las búsquedas
+
+**Cambios realizados:**
+- Se crean índices trigram (`gin_trgm_ops`) sobre `name` y `description` de `procedures`.
+- Se reemplaza la función `search_procedures(query text)` con ranking inteligente:
+  - Coincidencia exacta de nombre (score 100)
+  - Coincidencia por prefijo (score 80)
+  - Matching sin acentos (score 75-100)
+  - Full-text search con `ts_rank` (score 50+)
+  - Similitud trigram en nombre y descripción (score variable)
+- Retorna hasta 8 resultados ordenados por relevancia.
+- Incluye trámites relacionados de la misma institución.
+
+**Cómo ejecutar manualmente** (si no se usa Supabase CLI):
+1. Ve al **SQL Editor** de tu proyecto en Supabase.
+2. Copia y ejecuta el contenido del archivo `supabase/migrations/20260522000000_improve_search_procedures.sql`.
+
 ---
 
 ## 🗄️ Estructura del Proyecto
