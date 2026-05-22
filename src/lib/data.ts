@@ -251,6 +251,7 @@ export const observatoryService = {
     const { data, error } = await supabase
       .from('observatory')
       .select('*')
+      .is('deleted_at', null)
       .order('evaluation_score', { ascending: false });
 
     if (error) {
