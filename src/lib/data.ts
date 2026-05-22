@@ -165,22 +165,33 @@ export const proceduresService = {
   async search(query: string): Promise<Procedure[]> {
     if (!query.trim()) return [];
     
-    // Transformamos la query para que sea compatible con websearch_to_tsquery o phraseto_tsquery
-    // Al usar .textSearch por defecto Supabase usa websearch_to_tsquery que es muy amigable con el usuario.
+    // 1. Obtener los IDs y scores en orden de relevancia usando tu RPC
+    const { data: searchRows, error: searchError } = await supabase
+      .rpc('search_procedures', { query });
+
+    if (searchError || !searchRows || searchRows.length === 0) {
+      if (searchError) console.error('Error en búsqueda de trámites (RPC):', searchError);
+      return [];
+    }
+
+    const ids = searchRows.map((row: any) => String(row.id));
+
+    // 2. Traer la información completa de esos trámites
     const { data, error } = await supabase
       .from('procedures')
       .select('*, institutions(*)')
-      .textSearch('search_vector', query, {
-        type: 'websearch',
-        config: 'spanish'
-      })
+      .in('id', ids)
       .is('deleted_at', null);
 
     if (error) {
-      console.error('Error en búsqueda de trámites:', error);
+      console.error('Error al recuperar trámites detallados:', error);
       return [];
     }
-    return (data || []).map(p => mapProcedure(p, p.institutions));
+
+    const mapped = (data || []).map(p => mapProcedure(p, p.institutions));
+
+    // 3. Ordenar de acuerdo al ranking de relevancia original del RPC
+    return mapped.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
   },
 
   async getByCategory(category: string): Promise<Procedure[]> {
