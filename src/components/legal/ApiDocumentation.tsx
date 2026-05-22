@@ -41,6 +41,12 @@ export default function ApiDocumentation() {
       path: '/rest/v1/institutions',
       description: 'Directorio de instituciones responsables.',
       example: `${baseUrl}/rest/v1/institutions?select=name,full_name,website`
+    },
+    {
+      method: 'GET',
+      path: '/rest/v1/observatory',
+      description: 'Datos de evaluación y nivel de madurez digital de los trámites según el Observatorio.',
+      example: `${baseUrl}/rest/v1/observatory?select=tramite,evaluation_score,maturity_level&order=evaluation_score.desc`
     }
   ];
 
