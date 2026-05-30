@@ -125,8 +125,10 @@ export default function ObservatoryChatbot() {
           <div className="p-6 border-b border-gray-200">
             <h4 className="font-medium text-gray-900 mb-4">Acciones rápidas:</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <button className="flex items-center space-x-3 p-4 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors text-left">
+              <button 
                 onClick={() => handleQuickAction('search')}
+                className="flex items-center space-x-3 p-4 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors text-left"
+              >
                 <Search className="h-5 w-5 text-blue-600" />
                 <div>
                   <p className="font-medium text-blue-900">Buscar trámite específico</p>
@@ -134,8 +136,10 @@ export default function ObservatoryChatbot() {
                 </div>
               </button>
               
+              <button 
                 onClick={() => handleQuickAction('observatory')}
-              <button className="flex items-center space-x-3 p-4 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors text-left">
+                className="flex items-center space-x-3 p-4 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors text-left"
+              >
                 <BarChart3 className="h-5 w-5 text-blue-600" />
                 <div>
                   <p className="font-medium text-blue-900">Ver análisis del Observatorio</p>
@@ -143,8 +147,10 @@ export default function ObservatoryChatbot() {
                 </div>
               </button>
               
+              <button 
                 onClick={() => handleQuickAction('categories')}
-              <button className="flex items-center space-x-3 p-4 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors text-left">
+                className="flex items-center space-x-3 p-4 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors text-left"
+              >
                 <FileText className="h-5 w-5 text-blue-600" />
                 <div>
                   <p className="font-medium text-blue-900">Explorar categorías</p>
@@ -152,8 +158,10 @@ export default function ObservatoryChatbot() {
                 </div>
               </button>
               
-              <button className="flex items-center space-x-3 p-4 bg-orange-50 hover:bg-orange-100 rounded-xl transition-colors text-left">
+              <button 
                 onClick={() => handleQuickAction('help')}
+                className="flex items-center space-x-3 p-4 bg-orange-50 hover:bg-orange-100 rounded-xl transition-colors text-left"
+              >
                 <Users className="h-5 w-5 text-orange-600" />
                 <div>
                   <p className="font-medium text-orange-900">Centro de ayuda</p>
