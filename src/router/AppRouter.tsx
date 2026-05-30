@@ -55,6 +55,9 @@ const AppRouter: React.FC = () => {
           <Route path="settings" element={<AdminSettings />} />
         </Route>
 
+        {/* Login - standalone, no header/footer */}
+        <Route path="/login" element={<LoginPage />} />
+
         {/* Public Routes with standard Layout */}
         <Route path="/*" element={
           <Layout>
@@ -80,10 +83,6 @@ const AppRouter: React.FC = () => {
               <Route path="/acerca-de" element={<AboutPage />} />
               <Route path="/base-de-datos" element={<DatabasePage />} />
               <Route path="/api" element={<ApiPage />} />
-              
-              {/* Standalone pages inside Layout */}
-              <Route path="/login" element={<LoginPage />} />
-              
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Layout>
